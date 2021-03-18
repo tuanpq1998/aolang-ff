@@ -66,7 +66,7 @@ export default class InputBoardDialog extends Component {
                                     <label htmlFor="">Name: </label>
                                 </div>
                                 <div className="right">
-                                    <input type="text" name="teamName" maxLength="19" 
+                                    <input type="text" name="teamName" maxLength="16" 
                                         onInput={(event) => this.handleInput(event)} defaultValue={teamName}  />
                                 </div>
                             </div>

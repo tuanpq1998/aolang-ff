@@ -118,6 +118,12 @@ export default class MainBoard extends Component {
         });
     }
 
+    handleClickShowFinalResultDialog = () => {
+        this.setState({
+            displayFinalResultDialog : true,
+        })
+    }
+
     handleCloseFinalResultDialog = () => {
         this.setState({
             displayFinalResultDialog : false
@@ -150,6 +156,7 @@ export default class MainBoard extends Component {
             }))
         } : null;
         const finalKey = "w";
+        const hasFinalResult = data[finalKey].won !== "";
         const model4FinalResult = displayFinalResultDialog ? {
             ...data[finalKey],
             child : Object.values(data[finalKey].child).filter(c => c !== "").map(p => ({
@@ -159,7 +166,8 @@ export default class MainBoard extends Component {
         }: null;
         return (
             <div ref={this.componentRef}>
-            <Header reset={this.resetAllTeams} setting={() => this.handleClickSettingIcon()} 
+            <Header reset={this.resetAllTeams} setting={() => this.handleClickSettingIcon()}
+                hasFinalResult={hasFinalResult} showFinalResult={() => this.handleClickShowFinalResultDialog()} 
                 export={() => exportComponentAsJPEG(this.componentRef, {fileName : `${title} - ${subTitle}.jpg`})}
                 title={title} subTitle={subTitle}/> 
             <div id="main-board" style={{backgroundImage : `url(${background})`}}>

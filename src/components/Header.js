@@ -8,6 +8,10 @@ export default class Header extends Component {
                     <div className="nav-choose" onClick={this.props.setting}>
                         <span title="Setting" className="material-icons-outlined md-36"> settings </span>
                     </div>
+                    <div className="nav-choose" style={{display : this.props.hasFinalResult? null : "none"}} 
+                        onClick={this.props.showFinalResult}>
+                        <span title="Result" className="material-icons-outlined md-36"> equalizer </span>
+                    </div>
                     <div className="nav-choose" onClick={this.props.reset}>
                         <span title="Reset all team!" className="material-icons-outlined md-36"> restart_alt </span>
                     </div>
