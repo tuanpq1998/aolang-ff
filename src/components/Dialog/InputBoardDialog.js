@@ -6,8 +6,11 @@ export default class InputBoardDialog extends Component {
         super(props);
         this.state = {
             teamName : "",
+            color : "",
+            disable : 0
         }
         this.initState = this.initState.bind(this);
+        this.handleCheckbox = this.handleCheckbox.bind(this);
     }
 
     handleInput(e) {
@@ -22,25 +25,37 @@ export default class InputBoardDialog extends Component {
             ...this.props.model,
             teamName : this.state.teamName === "" ? this.props.model.teamName : this.state.teamName,
             color : this.state.color === "" ? this.props.model.color : this.state.color,
+            disable : this.state.disable
         });
         this.props.close();
         
     }
 
+    handleCheckbox() {
+        this.setState({
+            disable : this.state.disable===0 ? !this.props.model.disable : !this.state.disable
+        })
+    }
+
     initState() {
         this.setState({
-            teamName : ""
+            teamName : "",
+            color : "",
+            disable : 0,
         })
     }
 
     render() {
-        const teamName = this.props.model ? this.props.model.teamName : "";
-        const color = this.props.model ? this.props.model.color : "";
+        const {teamName, color, disable} = this.props.model ? this.props.model : {
+            teamName : "",
+            color : "",
+            disable : 0
+        };
         return (
-            <div>
+            <>
                 <ReactModal isOpen={this.props.display} shouldFocusAfterRender={true} onRequestClose={this.props.close}
-                    onAfterOpen={this.initState} className="modal"
-                    overlayClassName="overlay">
+                    onAfterClose={this.initState} className="modal" closeTimeoutMS={500}
+                    overlayClassName="overlay"> 
                     <form onSubmit={(event) => this.handleSubmit(event)}>
                         <div className="box_header">
                             Input
@@ -51,7 +66,7 @@ export default class InputBoardDialog extends Component {
                                     <label htmlFor="">Name: </label>
                                 </div>
                                 <div className="right">
-                                    <input type="text" name="teamName" 
+                                    <input type="text" name="teamName" maxLength="19" 
                                         onInput={(event) => this.handleInput(event)} defaultValue={teamName}  />
                                 </div>
                             </div>
@@ -74,6 +89,15 @@ export default class InputBoardDialog extends Component {
                                 </div>
                             </div>
 
+                            <div className="flex-container">
+                                <div className="left">
+                                    <label htmlFor="">Disable: </label>
+                                </div>
+                                <div className="right">
+                                    <input defaultChecked={disable} onChange={this.handleCheckbox} type="checkbox" name="disable" value="1"/>
+                                </div>
+                            </div>
+
                         </div>
                         <div className="box_footer">
                             <button onClick={this.props.close} className="btn btn-cancel" type="button" >Cancel</button>
@@ -81,7 +105,7 @@ export default class InputBoardDialog extends Component {
                         </div>
                     </form>
                 </ReactModal>
-            </div>
+            </>
         )
     }
 }

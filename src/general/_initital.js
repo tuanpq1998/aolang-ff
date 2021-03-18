@@ -7,7 +7,18 @@ const getRandomColor = () => {
       color += letters[Math.floor(Math.random() * 16)];
     }
     return color;
-  }
+}
+
+export const GET_INIT_SETTINGS = () => {
+    return {
+        title : "Ao Làng 1v1",
+        subTitle : "2021", 
+        background : "https://i.imgur.com/JWYyjZB.jpg",
+        showResult : true,
+        theme : "",
+        type : "",
+    }
+}
 
 export const GET_TEMPLATE_BOARD = (type) => {
     switch(type){
@@ -21,6 +32,7 @@ export const GET_TEMPLATE_BOARD = (type) => {
                         y : 3+(i-1)*(SIZE_Y_BOARD+PADDING_X_BOARD),
                     },
                     image : "",
+                    disable : false,
                     color : getRandomColor(),
                 }
 
@@ -66,6 +78,7 @@ export const GET_TEMPLATE_BOARD = (type) => {
                 },
                 result : "0-0",
                 pen : "",
+                isFinal : true,
                 won : "",
                 color : "",
                 location : {
@@ -73,7 +86,14 @@ export const GET_TEMPLATE_BOARD = (type) => {
                     y: (data["w1234"].location.y+data["w5678"].location.y)/2,
                 },
             }
-
+            data["t1"].next = "w12";
+            data["t2"].next = "w12";
+            data["t3"].next = "w34";
+            data["t4"].next = "w34";
+            data["t5"].next = "w56";
+            data["t6"].next = "w56";
+            data["t7"].next = "w78";
+            data["t8"].next = "w78";
             data["w12"].next =  "w1234";
             data["w34"].next ="w1234";
             data["w56"].next = "w5678";

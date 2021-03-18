@@ -3,20 +3,50 @@
   --line-color : rgb(0, 0, 0);
 }
 
-@font-face {
-  font-family: Beba;
-  src: url("https://khoatk.fo4.garena.vn/fonts/UTMBebas.woff") format("woff")
-}
-
 body {
   font-family: "Bebas Neue", sans-serif;
 }
 
 .modal {
   width: 35vw;
-  height: 50vh;
   background: url(https://i.imgur.com/fxJPJUi.png);
   background-size: 100% 100%;
+}
+
+.modal-result {
+  background: url(https://i.imgur.com/fxJPJUi.png);
+  background-size: 100% 100%;
+}
+
+.modal-result .box-body {
+  position: relative;
+}
+
+#first, #second {
+  color: rgba(0, 0, 0, 0.8);
+  padding: 0 10px;
+  position: absolute;
+}
+
+.modal-result .result-img {
+  margin-bottom: 20px;
+  width: 100%;
+  height: 100%;
+}
+
+.ReactModal__Overlay {
+  position: relative;
+  z-index: 2;
+  opacity: 0;
+  transition: opacity 200ms ease-in-out;
+}
+
+.ReactModal__Overlay--after-open{
+  opacity: 1;
+}
+
+.ReactModal__Overlay--before-close{
+  opacity: 0;
 }
 
 .overlay {
@@ -31,27 +61,65 @@ body {
   background-color:rgba(0, 0, 0, 0.6);
 }
 
+.header {
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 0;
+}
+
+.heading-container {
+  font-family: "Contrail One", sans-serif;
+  font-size: 6.8vw;
+  margin: 10px 50px;
+  line-height: 1em;
+}
+
+.heading-container div {
+  background-color:rgba(0, 0, 0, 0.1);
+  padding: 5px 4px;
+  text-transform: uppercase;
+}
+
+.subhead {
+  float: right;
+}
+
+nav {
+  padding: 5px 0;
+  display: flex;
+  justify-content: flex-end;
+  flex-direction: row;
+}
+
+.nav-choose {
+  cursor: pointer;
+  margin: 0 3px;
+}
+
 .team {
   font-family: 'Oswald', serif;
-  border-left: 6px solid rgb(40, 130, 134);
+  border-left: 0.41vw solid rgb(40, 130, 134);
   height: 100%;
   background-color: rgb(43,48,57);
   color: white;
-  font-size: 22px;
+  font-size: 1.5vw;
   display: flex;
   justify-content: center;
   align-items: center;
   cursor: pointer;
+  position: relative;
+  z-index: 1;
 }
 
 .line-p1 {
-  border-right: 2px solid var(--line-color);
-  border-top: 2px solid var(--line-color);
-  border-bottom: 2px solid var(--line-color);
+  border-right: 0.14vw solid var(--line-color);
+  border-top: 0.14vw solid var(--line-color);
+  border-bottom: 0.14vw solid var(--line-color);
 }
 
 .line-p2 {
-  border-top: 2px solid var(--line-color);
+  border-top: 0.14vw solid var(--line-color);
 }
 
 #main-board {
@@ -60,15 +128,13 @@ body {
   grid-template-rows: repeat(35, calc(100vh/35));
   height: 100vh;
   width: 100vw;
-
-  background: url('https://cdn.pixabay.com/photo/2017/11/27/13/56/grass-2981390_1280.jpg');
   background-size: 100% 100%;
+  
 }
-
 
 .box_header {
   color: #fff;
-  font-size: 25px;
+  font-size: 1.7vw;
   background: linear-gradient(to right, #1b20ff 0%, #c404ff 100%);
   text-align: center;
   line-height: 1em;
@@ -84,7 +150,7 @@ form {
 .box_body {
   font-family: 'Open Sans', sans-serif;
   padding: 15px;
-  font-size: 16px;
+  font-size: 1vw;
 }
 
 .flex-container {
@@ -106,22 +172,29 @@ form {
 
 .box_body input {
   font-family: 'Open Sans', sans-serif;
-  font-size: 14px;
+  font-size: 1vw;
   display: block;
   padding: 5px;
 }
 
+input[type="checkbox"]{
+  zoom: 1.5;
+}
+
 .box_footer {
-  position: absolute;
+  position: relative;
   bottom: 0;
   right: 0;  
   padding: 10px;
+  padding-top: 0;
+  display: flex;
+  justify-content: flex-end;
 }
 
 .box_footer .btn {
   font-family: "Bebas Neue", sans-serif;
   font-weight: 400;
-  font-size: 20px;
+  font-size: 1.3vw;
   color: black;
   min-width: 100px;
   text-align: center;
@@ -171,7 +244,7 @@ input[disabled] {
   margin: 2px auto;
   display: inline-block;
   text-align: center;
-  font-size: 22px;
+  font-size: 1.5vw;
 }
 
 .result p span {
@@ -179,3 +252,35 @@ input[disabled] {
   background-color: rgb(156, 210, 3);
   margin-right: 3px;  
 }
+
+.material-icons-outlined {
+  font-family: 'Material Icons';
+  font-weight: normal;
+  font-style: normal;
+  font-size: 1.6vw;
+  display: inline-block;
+  line-height: 1;
+  text-transform: none;
+  letter-spacing: normal;
+  word-wrap: normal;
+  white-space: nowrap;
+  direction: ltr;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+
+  -moz-osx-font-smoothing: grayscale;
+
+  font-feature-settings: 'liga';
+}
+
+.material-icons-outlined.md-36 {
+  font-size: 2.5vw;
+}
+.material-icons-outlined.md-48 {
+  font-size: 3.3vw;
+}
+
+.material-icons-outlined.gold {
+  color: gold
+}
+

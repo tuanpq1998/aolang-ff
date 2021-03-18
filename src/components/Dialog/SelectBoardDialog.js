@@ -53,7 +53,6 @@ export default class SelectBoardDialog extends Component {
         
     }
 
-
     initState() {
         this.setState({
             won : "",
@@ -66,17 +65,18 @@ export default class SelectBoardDialog extends Component {
         const wonId = this.props.model ? this.props.model.won : "";
         const result = this.props.model ? this.props.model.result : "";
         var {won} = this.state;
+
         const boxBody = teams ? (<>
             <div className="flex-container">
                 <div className="left-select">
-                    <input ref={this.t0Check} id={`sbd-${teams[0].id}`} defaultChecked={teams[0].id === won ||wonId === teams[0].id} type="radio" key={`sbd-${teams[0].id}`}
+                    <input ref={this.t0Check} id={`sbd-${teams[0].id}`} defaultChecked={teams[0].id === won || wonId === teams[0].id} type="radio" key={`sbd-${teams[0].id}`}
                         onInput={(event) => this.handleInput(event)} name="won" value={teams[0].id} />
                     <label className="team" style={{borderLeft : `6px solid ${teams[0].color}`}} htmlFor={`sbd-${teams[0].id}`}>
                         {teams[0].teamName}
                     </label>
                 </div>
                 <div className="right-select">
-                    <input ref={this.t1Check} id={`sbd-${teams[1].id}`} defaultChecked={teams[1].id === won ||wonId === teams[1].id} type="radio" key={`sbd-${teams[1].id}`}
+                    <input ref={this.t1Check} id={`sbd-${teams[1].id}`} defaultChecked={teams[1].id === won || wonId === teams[1].id} type="radio" key={`sbd-${teams[1].id}`}
                         onInput={(event) => this.handleInput(event)} name="won" value={teams[1].id} />
                     <label className="team" style={{borderLeft : `6px solid ${teams[1].color}`}} htmlFor={`sbd-${teams[1].id}`}>
                         {teams[1].teamName}
@@ -101,12 +101,17 @@ export default class SelectBoardDialog extends Component {
                     <input disabled min={0} type="number" name="res"/>
                 </div>
             </div> 
-            </>) : "";
-        
+            </>) : (<p>Chưa nhập đủ kết quả!</p>);
+        const boxFooter = teams ? (<>
+            <button onClick={this.props.close} className="btn btn-cancel" type="button" >Cancel</button>
+            <input className="btn" type="submit" value="Submit" />
+        </>) : (
+            <button className="btn" onClick={this.props.close}>Cancel</button>
+        );
         return (
-            <div>
+            <>
                 <ReactModal isOpen={this.props.display} shouldFocusAfterRender={true} onRequestClose={this.props.close}
-                    className="modal" onAfterOpen={this.initState}
+                    className="modal" onAfterClose={this.initState} 
                     overlayClassName="overlay">
                     <form onSubmit={(event) => this.handleSubmit(event)}>
                         <div className="box_header">
@@ -116,12 +121,11 @@ export default class SelectBoardDialog extends Component {
                             {boxBody}
                         </div>
                         <div className="box_footer">
-                            <button onClick={this.props.close} className="btn btn-cancel" type="button" >Cancel</button>
-                            <input className="btn" type="submit" value="Submit" />
+                            {boxFooter}
                         </div>
                     </form>
                 </ReactModal>
-            </div>
+            </>
         )
     }
 }

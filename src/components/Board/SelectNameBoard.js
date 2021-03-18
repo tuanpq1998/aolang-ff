@@ -9,13 +9,18 @@ export default class SelectNameBoard extends Component {
         const style = {
             gridColumn: `${x}/span ${SIZE_X_BOARD}`,
             gridRow: `${y}/span ${SIZE_Y_BOARD}`,
-            borderLeft : team != null ? `6px solid ${team.color}` : null,
+            borderLeft : team != null ? `0.41vw solid ${team.color}` : null,
+            color : this.props.isFinal ? "gold" : null,
         }
 
         return (
+            <>
             <div onClick={this.props.onClick} style={style} className="team">
+                {this.props.isFinal ? <span className="material-icons-outlined md-36 gold">emoji_events</span> : ""}
                 {team !== null ? team.teamName : ""}
             </div>
+            
+            </>
         )
     }
 }

@@ -29,7 +29,7 @@ export default class ConnectLine extends Component {
             <> 
                 <div style={styleLineP1} className="line-p1" />
                 <div style={styleLineP2} className="line-p2">
-                    {resultHtml}
+                    {this.props.showResult ? resultHtml : ""}
                 </div>
             </>
         )

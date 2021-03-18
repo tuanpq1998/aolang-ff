@@ -9,6 +9,7 @@ class InputNameBoard extends Component {
             gridColumn: `${x}/${x+SIZE_X_BOARD}`,
             gridRow: `${y}/${y+SIZE_Y_BOARD}`,
             borderLeft : `6px solid ${this.props.borderColor}`,
+            textDecoration : this.props.disable ? "line-through" : "none",
         }
         return (
             <div onClick={this.props.onClick} style={style} className="team">

@@ -4,3 +4,13 @@
   outline: 0;
 }
 
+#Test {
+  position: absolute;
+  top: 0;
+  visibility: hidden;
+  height: auto;
+  width: auto;
+  white-space: nowrap;
+  color: transparent
+}
+

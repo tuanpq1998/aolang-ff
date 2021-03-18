@@ -1,12 +1,17 @@
 import React, { Component } from 'react'
 import { TYPE_8P_1V1 } from '../general/_constant';
-import { GET_TEMPLATE_BOARD } from '../general/_initital';
+import { GET_INIT_SETTINGS, GET_TEMPLATE_BOARD } from '../general/_initital';
 import ConnectLine from './ConnectLine'
 import InputNameBoard from './Board/InputNameBoard'
 import SelectNameBoard from './Board/SelectNameBoard';
 import InputBoardDialog from './Dialog/InputBoardDialog';
 import SelectBoardDialog from './Dialog/SelectBoardDialog';
 import { v4 as uuidv4 } from 'uuid';
+import Header from './Header';
+import SettingDialog from './Dialog/SettingDialog';
+import { exportComponentAsJPEG } from 'react-component-export-image';
+import AlertDiaglog from './Dialog/AlertDialog';
+
 
 export default class MainBoard extends Component {
     constructor(props) {
@@ -14,16 +19,28 @@ export default class MainBoard extends Component {
         this.state = {
             data : GET_TEMPLATE_BOARD(TYPE_8P_1V1),
             displayInputDialog : false,
+            displaySettingDialog : false,
             editingId : "",
             displaySelectDialog : false,
+            setting : GET_INIT_SETTINGS(),
+            displayAlertDialog : false,
+            displayFinalResultDialog : false,
         }
         this.handleSubmitInputDialog = this.handleSubmitInputDialog.bind(this);
+        this.handleSubmitSettingDialog = this.handleSubmitSettingDialog.bind(this);
+        this.componentRef = React.createRef();
     }
 
     handleClickInputBoard = (e) => {
         this.setState({
             displayInputDialog : true, 
             editingId : e
+        })
+    }
+
+    handleClickSettingIcon = () => {
+        this.setState({
+            displaySettingDialog : true, 
         })
     }
 
@@ -46,11 +63,40 @@ export default class MainBoard extends Component {
         })
     }
 
+    handleCloseSettingDialog = () => {
+        this.setState({
+            displaySettingDialog : false
+        })
+    }
+
+    handleCloseAlertDialog = () => {
+        this.setState({
+            displayAlertDialog : false,
+        })
+    }
+
     handleSubmitInputDialog = (newObj) => {
         var data = this.state.data;
         const id = newObj.id;
         data[id].teamName = newObj.teamName;
         data[id].color = newObj.color;
+        data[id].disable = newObj.disable;
+        if (newObj.disable) {
+            const next = data[id].next;
+            const restTeamId = Object.keys(data[next].child).find(k => k !== id);
+            if (data[restTeamId].disable) {
+                data[id].disable = false;
+                this.setState({
+                    displayAlertDialog : true
+                })
+                return;
+            } else {
+                data[next].won = Object.keys(data[next].child).find(k => k !== id);
+                data[next].result = "";
+                const nextnext = data[next].next;
+                data[nextnext].child[next] = data[next].won;
+            }
+        }
         this.setState({
             data
         });
@@ -63,13 +109,37 @@ export default class MainBoard extends Component {
         data[id].result = newObj.result;
         const next = data[id].next;
         if (next) data[next].child[id] = newObj.won;
+        if (newObj.isFinal) 
+            this.setState({
+                displayFinalResultDialog : true
+            })
         this.setState({
             data
         });
     }
 
+    handleCloseFinalResultDialog = () => {
+        this.setState({
+            displayFinalResultDialog : false
+        })
+    }
+
+    handleSubmitSettingDialog = (newSetting) => {
+        this.setState({
+            setting : newSetting
+        })
+    }
+
+    resetAllTeams = () => {
+        this.setState({
+            data : GET_TEMPLATE_BOARD(TYPE_8P_1V1)
+        })
+    }
+
     render() {
-        const {editingId, data, displayInputDialog, displaySelectDialog} = this.state;
+        const {title, subTitle, background, showResult} = this.state.setting;
+        const {editingId, data, displayInputDialog, displaySelectDialog, displaySettingDialog, displayAlertDialog
+            , displayFinalResultDialog} = this.state;
         const model4Input = displayInputDialog ? {...data[editingId], id : editingId} : null;
         const model4Select = displaySelectDialog ? {
             ...data[editingId], 
@@ -79,27 +149,50 @@ export default class MainBoard extends Component {
                 ...data[p]
             }))
         } : null;
-        return ( 
-            <div id="main-board">
+        const finalKey = "w";
+        const model4FinalResult = displayFinalResultDialog ? {
+            ...data[finalKey],
+            child : Object.values(data[finalKey].child).filter(c => c !== "").map(p => ({
+                id : p, 
+                ...data[p]
+            }))
+        }: null;
+        return (
+            <div ref={this.componentRef}>
+            <Header reset={this.resetAllTeams} setting={() => this.handleClickSettingIcon()} 
+                export={() => exportComponentAsJPEG(this.componentRef, {fileName : `${title} - ${subTitle}.jpg`})}
+                title={title} subTitle={subTitle}/> 
+            <div id="main-board" style={{backgroundImage : `url(${background})`}}>
+
+                <SettingDialog display={displaySettingDialog} close={this.handleCloseSettingDialog} setting={this.state.setting}
+                    submit={this.handleSubmitSettingDialog} />
+
+                <AlertDiaglog display={displayAlertDialog} close={this.handleCloseAlertDialog} result={model4FinalResult} 
+                    displayFinalResult={displayFinalResultDialog} closeFinalResult={this.handleCloseFinalResultDialog}/>
+
                 <InputBoardDialog close={this.handleCloseInputDialog} display={displayInputDialog} 
                     model={model4Input} submit={this.handleSubmitInputDialog}/>
+
                 <SelectBoardDialog model={model4Select}
                 close={this.handleCloseSelectDialog} display={displaySelectDialog} submit={this.handleSubmitSelectDialog}/>
+
                 {Object.keys(data).filter(o => o.startsWith("t")).map(k => (
-                    <InputNameBoard onClick={() => this.handleClickInputBoard(k)}
+                    <InputNameBoard onClick={() => this.handleClickInputBoard(k)} disable={data[k].disable}
                         key={uuidv4()} location={data[k].location} teamName={data[k].teamName} borderColor={data[k].color}/>
                 ))}
+
                 {Object.keys(data).filter(o => o.startsWith("w")).map(k => (
                     <>
-                        <ConnectLine key={uuidv4()} model={{
+                        <ConnectLine key={uuidv4()} showResult={showResult} model={{
                              ...data[k], 
                              child : Object.keys(data[k].child).map(_key => data[_key])
                         }}/>
-                        <SelectNameBoard model={data[k].won !== "" ? data[data[k].won] : null} 
+                        <SelectNameBoard isFinal={data[k].isFinal} model={data[k].won !== "" ? data[data[k].won] : null} 
                             onClick={() => this.handleClickSelectBoard(k)} key={uuidv4()} location={data[k].location} />
                     </>
                 ))}
             </div>
-        )
+            
+        </div>)
     }
 }
