@@ -166,6 +166,10 @@ form {
   width: 30%;
 }
 
+.left-select .team, .right-select .team {
+  height: 2.7vw;
+}
+
 .right {
   flex-grow: 1
 }
@@ -175,10 +179,11 @@ form {
   font-size: 1vw;
   display: block;
   padding: 5px;
+  width: 70%;
 }
 
 input[type="checkbox"]{
-  zoom: 1.5;
+  zoom: 1.25;
 }
 
 .box_footer {
@@ -203,6 +208,7 @@ input[type="checkbox"]{
   background: linear-gradient(to right, #44cdff 0%, #39ffef 100%);
   border: 0;
   cursor: pointer;
+  height: 2.7vw;
 }
 
 .box_footer .btn-cancel {

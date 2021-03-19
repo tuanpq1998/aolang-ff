@@ -31,6 +31,25 @@ export default class MainBoard extends Component {
         this.componentRef = React.createRef();
     }
 
+    componentDidMount() {
+        console.log("did mount");
+        const data = JSON.parse(localStorage.getItem("data")) !== null ? 
+            JSON.parse(localStorage.getItem("data")) : GET_TEMPLATE_BOARD(TYPE_8P_1V1);
+        const setting = JSON.parse(localStorage.getItem("setting")) !== null ? 
+            JSON.parse(localStorage.getItem("setting")) : GET_INIT_SETTINGS();
+        this.setState({
+            data, setting
+        })
+    }
+
+    saveTeamData() {
+        localStorage.setItem("data", JSON.stringify(this.state.data));
+    }
+
+    saveSettingData() {
+        localStorage.setItem("setting", JSON.stringify(this.state.setting));
+    }
+
     handleClickInputBoard = (e) => {
         this.setState({
             displayInputDialog : true, 
@@ -100,6 +119,7 @@ export default class MainBoard extends Component {
         this.setState({
             data
         });
+        this.saveTeamData();
     }
 
     handleSubmitSelectDialog = (newObj) => {
@@ -116,6 +136,7 @@ export default class MainBoard extends Component {
         this.setState({
             data
         });
+        this.saveTeamData();
     }
 
     handleClickShowFinalResultDialog = () => {
@@ -132,7 +153,15 @@ export default class MainBoard extends Component {
 
     handleSubmitSettingDialog = (newSetting) => {
         this.setState({
-            setting : newSetting
+            setting : {
+                ...this.state.setting,
+                ...newSetting
+            }
+        }, () => {
+            if (newSetting.remember) {
+                this.saveTeamData();
+                this.saveSettingData();
+            } else localStorage.clear();
         })
     }
 
@@ -143,7 +172,7 @@ export default class MainBoard extends Component {
     }
 
     render() {
-        const {title, subTitle, background, showResult} = this.state.setting;
+        const {title, subTitle, background, showResult, showTitle} = this.state.setting;
         const {editingId, data, displayInputDialog, displaySelectDialog, displaySettingDialog, displayAlertDialog
             , displayFinalResultDialog} = this.state;
         const model4Input = displayInputDialog ? {...data[editingId], id : editingId} : null;
@@ -169,7 +198,8 @@ export default class MainBoard extends Component {
             <Header reset={this.resetAllTeams} setting={() => this.handleClickSettingIcon()}
                 hasFinalResult={hasFinalResult} showFinalResult={() => this.handleClickShowFinalResultDialog()} 
                 export={() => exportComponentAsJPEG(this.componentRef, {fileName : `${title} - ${subTitle}.jpg`})}
-                title={title} subTitle={subTitle}/> 
+                // export={() => this.handleExportClick()}
+                title={title} subTitle={subTitle} showTitle={showTitle}/> 
             <div id="main-board" style={{backgroundImage : `url(${background})`}}>
 
                 <SettingDialog display={displaySettingDialog} close={this.handleCloseSettingDialog} setting={this.state.setting}

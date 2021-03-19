@@ -19,10 +19,14 @@ export default class Header extends Component {
                         <span title="Export" className="material-icons-outlined md-36"> download </span>
                     </div>
                 </nav>
-                <div className="heading-container">
-                    <div className="heading">{this.props.title}</div>
-                    <div className="subhead">{this.props.subTitle}</div>
-                </div>
+                {
+                    this.props.showTitle && this.props.title.length + this.props.subTitle.length > 0 ? (
+                        <div className="heading-container">
+                            <div className="heading">{this.props.title}</div>
+                            <div className="subhead">{this.props.subTitle}</div>
+                        </div>
+                    ): null
+                }
             </div>
         )
     }

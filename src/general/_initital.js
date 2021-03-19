@@ -11,12 +11,14 @@ const getRandomColor = () => {
 
 export const GET_INIT_SETTINGS = () => {
     return {
-        title : "Ao Làng 1v1",
+        title : "League",
         subTitle : "2021", 
         background : "https://i.imgur.com/JWYyjZB.jpg",
         showResult : true,
         theme : "",
         type : "",
+        remember : true,
+        showTitle : true,
     }
 }
 

@@ -9,17 +9,21 @@ export default class SettingDialog extends Component {
             subTitle : null,
             background : null,
             showResult : 0,
+            showTitle : 0,
+            remember : 0,
         }
     }
 
     componentDidMount() {
         if(this.props.setting) {
-            const {title, subTitle, background, showResult} = this.props.setting;
+            const {title, subTitle, background, showResult, showTitle, remember} = this.props.setting;
             this.setState({
                 title,
                 subTitle,
                 background,
                 showResult,
+                showTitle,
+                remember,
             })
         }
     }
@@ -30,9 +34,21 @@ export default class SettingDialog extends Component {
         })
     }
 
-    handleCheckBox() {
+    handleShowResultCheckBox() {
         this.setState({
             showResult : !this.state.showResult
+        })
+    }
+
+    handleShowTitleCheckBox() {
+        this.setState({
+            showTitle : !this.state.showTitle
+        })
+    }
+
+    handleRememberCheckBox() {
+        this.setState({
+            remember : !this.state.remember
         })
     }
 
@@ -42,14 +58,16 @@ export default class SettingDialog extends Component {
             title : this.state.title!=null ? this.state.title : this.props.setting.title,
             subTitle : this.state.subTitle!=null ? this.state.subTitle : this.props.setting.subTitle,
             background : this.state.background!=null ? this.state.background : this.props.setting.background,
-            showResult : this.state.showResult
+            showResult : this.state.showResult,
+            showTitle : this.state.showTitle,
+            remember : this.state.remember,
         }
         this.props.submit(newSetting);
         this.props.close();
     }
 
     render() {
-        const {title, subTitle, background, showResult} = this.props.setting;
+        const {title, subTitle, background, showResult, showTitle, remember} = this.props.setting;
         return (
             <>
                 <ReactModal isOpen={this.props.display} shouldFocusAfterRender={true} onRequestClose={this.props.close}
@@ -81,6 +99,15 @@ export default class SettingDialog extends Component {
 
                             <div className="flex-container">
                                 <div className="left">
+                                    <label htmlFor="">Show title: </label>
+                                </div>
+                                <div className="right">
+                                    <input defaultChecked={showTitle} onChange={() => this.handleShowTitleCheckBox()} type="checkbox" name="showTitle" value="1"/>
+                                </div>
+                            </div>
+
+                            <div className="flex-container">
+                                <div className="left">
                                     <label htmlFor="">Background Image URL: </label>
                                 </div>
                                 <div className="right">
@@ -90,11 +117,20 @@ export default class SettingDialog extends Component {
                             </div>
 
                             <div className="flex-container">
-                            <div className="left">
+                                <div className="left">
                                     <label htmlFor="">Show result: </label>
                                 </div>
                                 <div className="right">
-                                    <input defaultChecked={showResult} onChange={() => this.handleCheckBox()} type="checkbox" name="showResult" value="1"/>
+                                    <input defaultChecked={showResult} onChange={() => this.handleShowResultCheckBox()} type="checkbox" name="showResult" value="1"/>
+                                </div>
+                            </div>
+
+                            <div className="flex-container">
+                                <div className="left">
+                                    <label htmlFor="">Remember setting & data: </label>
+                                </div>
+                                <div className="right">
+                                    <input defaultChecked={remember} onChange={() => this.handleRememberCheckBox()} type="checkbox" name="remember" value="1"/>
                                 </div>
                             </div>
                         </div>
