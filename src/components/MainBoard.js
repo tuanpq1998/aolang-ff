@@ -184,6 +184,12 @@ export default class MainBoard extends Component {
         
     }
 
+    resetToDefaultSetting = () => {
+        this.setState({
+            setting : GET_INIT_SETTINGS(),
+        }, () => this.saveSettingData())
+    }
+
     render() {
         const {title, subTitle, background, showResult, showTitle} = this.state.setting;
         const {editingId, data, displayInputDialog, displaySelectDialog, displaySettingDialog, displayAlertDialog
@@ -215,7 +221,7 @@ export default class MainBoard extends Component {
             <div id="main-board" style={{backgroundImage : `url(${background})`}}>
 
                 <SettingDialog display={displaySettingDialog} close={this.handleCloseSettingDialog} setting={this.state.setting}
-                    submit={this.handleSubmitSettingDialog} />
+                    submit={this.handleSubmitSettingDialog} reset={this.resetToDefaultSetting} />
 
                 <AlertDiaglog display={displayAlertDialog} close={this.handleCloseAlertDialog} result={model4FinalResult} 
                     displayFinalResult={displayFinalResultDialog} closeFinalResult={this.handleCloseFinalResultDialog}

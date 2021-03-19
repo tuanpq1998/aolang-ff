@@ -66,13 +66,18 @@ export default class SettingDialog extends Component {
         this.props.close();
     }
 
+    handleReset = () => {
+        this.props.reset();
+        this.props.close();
+    }
+
     render() {
         const {title, subTitle, background, showResult, showTitle, remember} = this.props.setting;
         return (
             <>
                 <ReactModal isOpen={this.props.display} shouldFocusAfterRender={true} onRequestClose={this.props.close}
                     className="modal" overlayClassName="overlay" closeTimeoutMS={500}>
-                    <form onSubmit={(event) => this.handleSubmit(event)}>
+                    <form onReset={this.handleReset} onSubmit={(event) => this.handleSubmit(event)}>
                         <div className="box_header">
                             Setting
                         </div>
@@ -136,6 +141,7 @@ export default class SettingDialog extends Component {
                         </div>
                         <div className="box_footer">
                             <button onClick={this.props.close} className="btn btn-cancel" type="button" >Cancel</button>
+                            <input className="btn btn-reset" type="reset" value="Reset" />
                             <input className="btn" type="submit" value="Submit" />
                         </div>
                     </form>

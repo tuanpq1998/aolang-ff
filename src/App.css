@@ -215,6 +215,14 @@ input[type="checkbox"]{
   background: none;
 }
 
+.box_footer .btn-reset {
+  color: #fff;
+  background: #094aff !important;
+  background: -webkit-gradient(linear, left top, right top, from(#094aff), to(#5277ff)) !important;
+  background: -o-linear-gradient(left, #094aff 0%, #5277ff 100%) !important;
+  background: linear-gradient(to right, #094aff 0%, #5277ff 100%) !important;
+}
+
 .left-select {
   width: 50%;
   margin-right: 10px;
