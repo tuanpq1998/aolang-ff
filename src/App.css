@@ -7,6 +7,24 @@ body {
   font-family: "Bebas Neue", sans-serif;
 }
 
+@media only screen and (max-width: 768px) {
+  #root {
+    display: none;
+  }
+  
+  body {
+    background-color: lightblue;
+  }
+
+  body:after {
+    content: "This website for PC screen (>=1024px) only!";
+    font-size: 24px;
+    display: flex;
+    justify-content: center;
+  }
+
+}
+
 .modal {
   width: 35vw;
   background: url(https://i.imgur.com/fxJPJUi.png);
