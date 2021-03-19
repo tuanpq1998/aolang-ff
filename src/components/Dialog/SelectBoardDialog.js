@@ -22,10 +22,13 @@ export default class SelectBoardDialog extends Component {
     handleSubmit(event) {
         event.preventDefault();
         if (this.state.won !== ""){
+            const {result, won} = this.state;
+            const newResult = result.filter(e => e==null).length <= 1 
+                ? result.map(e => e==null || e===""? 0 : e).join("-") : "";
             this.props.submit({
                 ...this.props.model,
-                won : this.state.won,
-                result : this.state.result.map(e => e==null || e===""? 0 : e).join("-"),
+                won,
+                result : newResult,
             });
         }
         this.props.close();
