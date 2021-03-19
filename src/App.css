@@ -17,7 +17,7 @@ body {
   }
 
   body:after {
-    content: "This website for PC screen (>=1024px) only!";
+    content: "Website was created for PC screen (>=1024px) only!";
     font-size: 24px;
     display: flex;
     justify-content: center;
@@ -96,8 +96,9 @@ body {
 }
 
 .heading-container div {
-  background-color:rgba(0, 0, 0, 0.1);
-  padding: 5px 15px 5px 5px;
+  box-shadow: 2px 1px rgb(0 0 0 / 10%);
+  background-color: rgb(255 255 255 / 10%);
+  padding: 5px 20px 5px 5px;
   text-transform: uppercase;
 }
 
@@ -106,7 +107,6 @@ body {
 }
 
 nav {
-  padding: 5px 0;
   display: flex;
   justify-content: flex-end;
   flex-direction: row;
@@ -114,14 +114,21 @@ nav {
 
 .nav-choose {
   cursor: pointer;
-  margin: 0 3px;
+  padding: 5px 5px;
+  transition: background-color 200ms ease-in-out;
+}
+
+.nav-choose:hover {
+  background-color: rgba(0, 0, 0, 0.2);
+  color: rgba(0, 0, 0, 0.8);
 }
 
 .team {
+  box-shadow: 2px 2px rgba(43, 48, 57, 0.4);
   font-family: 'Oswald', serif;
   border-left: 0.41vw solid rgb(40, 130, 134);
   height: 100%;
-  background-color: rgb(43,48,57);
+  background-color: rgb(43, 48, 57);
   color: white;
   font-size: 1.5vw;
   display: flex;
@@ -188,6 +195,11 @@ form {
 
 .left-select .team, .right-select .team {
   height: 2.7vw;
+  transition: background-color 200ms ease-in-out;
+}
+
+.left-select .team:hover, .right-select .team:hover {
+  background-color: rgba(43, 48, 57, 0.8);
 }
 
 .right {
@@ -204,6 +216,11 @@ form {
 
 input[type="checkbox"]{
   zoom: 1.25;
+  width: unset;
+}
+
+input[type="color"] {
+  width: 40px;
 }
 
 .box_footer {
@@ -220,7 +237,7 @@ input[type="checkbox"]{
   font-family: "Bebas Neue", sans-serif;
   font-weight: 400;
   font-size: 1.3vw;
-  color: black;
+  color: rgb(0,0,0);
   min-width: 100px;
   text-align: center;
   padding: 5px 10px;
@@ -229,6 +246,11 @@ input[type="checkbox"]{
   border: 0;
   cursor: pointer;
   height: 2.7vw;
+  transition: color 200ms ease-in;
+}
+
+.box_footer .btn:hover {
+  color: #888;
 }
 
 .box_footer .btn-cancel {

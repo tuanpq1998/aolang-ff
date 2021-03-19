@@ -104,20 +104,20 @@ export default class SettingDialog extends Component {
 
                             <div className="flex-container">
                                 <div className="left">
-                                    <label htmlFor="">Show title: </label>
-                                </div>
-                                <div className="right">
-                                    <input defaultChecked={showTitle} onChange={() => this.handleShowTitleCheckBox()} type="checkbox" name="showTitle" value="1"/>
-                                </div>
-                            </div>
-
-                            <div className="flex-container">
-                                <div className="left">
                                     <label htmlFor="">Background Image URL: </label>
                                 </div>
                                 <div className="right">
                                     <input type="url" name="background" 
                                         onInput={(event) => this.handleInput(event)} defaultValue={background}  />
+                                </div>
+                            </div>
+
+                            <div className="flex-container">
+                                <div className="left">
+                                    <label htmlFor="">Show title: </label>
+                                </div>
+                                <div className="right">
+                                    <input defaultChecked={showTitle} onChange={() => this.handleShowTitleCheckBox()} type="checkbox" name="showTitle" value="1"/>
                                 </div>
                             </div>
 

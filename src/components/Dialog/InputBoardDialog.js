@@ -73,19 +73,19 @@ export default class InputBoardDialog extends Component {
 
                             <div className="flex-container">
                                 <div className="left">
-                                    <label htmlFor="">Color: </label>
+                                    <label htmlFor="">Image: </label>
                                 </div>
                                 <div className="right">
-                                    <input type="color" name="color" onInput={(event) => this.handleInput(event)} defaultValue={color}  />
+                                    <input type="text" name="image" disabled  />
                                 </div>
                             </div>
 
                             <div className="flex-container">
                                 <div className="left">
-                                    <label htmlFor="">Image: </label>
+                                    <label htmlFor="">Color: </label>
                                 </div>
                                 <div className="right">
-                                    <input type="text" name="image" disabled  />
+                                    <input type="color" name="color" onInput={(event) => this.handleInput(event)} defaultValue={color}  />
                                 </div>
                             </div>
 
