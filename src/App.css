@@ -280,7 +280,7 @@ input[disabled] {
 }
 
 .material-icons-outlined.md-36 {
-  font-size: 2.5vw;
+  font-size: 2.3vw;
 }
 .material-icons-outlined.md-48 {
   font-size: 3.3vw;
@@ -290,10 +290,29 @@ input[disabled] {
   color: gold
 }
 
+.material-icons-outlined.fade {
+  color: rgba(0, 0, 0, 0.6)
+}
+
 .footer {
   position: absolute;
   bottom: 0;
   left: 0;
   font-size: 1.5vw;
   padding: 5px;
+}
+
+.about-me {
+  font-family: "JetBrains Mono", sans-serif;
+  font-size: 1.2vw;
+}
+
+.about-me p {
+  padding: 5px 0;
+}
+
+.qr-image {
+  width: 120px;
+  margin: 5px auto 10px auto;
+  display: block;
 }

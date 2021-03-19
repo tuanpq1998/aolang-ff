@@ -25,6 +25,7 @@ export default class MainBoard extends Component {
             setting : GET_INIT_SETTINGS(),
             displayAlertDialog : false,
             displayFinalResultDialog : false,
+            displayAboutMeDialog : false,
         }
         this.handleSubmitInputDialog = this.handleSubmitInputDialog.bind(this);
         this.handleSubmitSettingDialog = this.handleSubmitSettingDialog.bind(this);
@@ -144,6 +145,18 @@ export default class MainBoard extends Component {
         })
     }
 
+    handleClickAboutMeDialog = () => {
+        this.setState({
+            displayAboutMeDialog : true
+        })
+    }
+
+    handleCloseAboutMeDialog = () => {
+        this.setState({
+            displayAboutMeDialog: false
+        })
+    }
+
     handleCloseFinalResultDialog = () => {
         this.setState({
             displayFinalResultDialog : false
@@ -174,7 +187,7 @@ export default class MainBoard extends Component {
     render() {
         const {title, subTitle, background, showResult, showTitle} = this.state.setting;
         const {editingId, data, displayInputDialog, displaySelectDialog, displaySettingDialog, displayAlertDialog
-            , displayFinalResultDialog} = this.state;
+            , displayFinalResultDialog, displayAboutMeDialog} = this.state;
         const model4Input = displayInputDialog ? {...data[editingId], id : editingId} : null;
         const model4Select = displaySelectDialog ? {
             ...data[editingId], 
@@ -198,15 +211,15 @@ export default class MainBoard extends Component {
             <Header reset={this.resetAllTeams} setting={() => this.handleClickSettingIcon()}
                 hasFinalResult={hasFinalResult} showFinalResult={() => this.handleClickShowFinalResultDialog()} 
                 export={() => exportComponentAsJPEG(this.componentRef, {fileName : `${title} - ${subTitle}.jpg`})}
-                // export={() => this.handleExportClick()}
-                title={title} subTitle={subTitle} showTitle={showTitle}/> 
+                title={title} subTitle={subTitle} showTitle={showTitle} showAboutMe={this.handleClickAboutMeDialog}/> 
             <div id="main-board" style={{backgroundImage : `url(${background})`}}>
 
                 <SettingDialog display={displaySettingDialog} close={this.handleCloseSettingDialog} setting={this.state.setting}
                     submit={this.handleSubmitSettingDialog} />
 
                 <AlertDiaglog display={displayAlertDialog} close={this.handleCloseAlertDialog} result={model4FinalResult} 
-                    displayFinalResult={displayFinalResultDialog} closeFinalResult={this.handleCloseFinalResultDialog}/>
+                    displayFinalResult={displayFinalResultDialog} closeFinalResult={this.handleCloseFinalResultDialog}
+                    displayAboutMe={displayAboutMeDialog} closeAboutMe={this.handleCloseAboutMeDialog}/>
 
                 <InputBoardDialog close={this.handleCloseInputDialog} display={displayInputDialog} 
                     model={model4Input} submit={this.handleSubmitInputDialog}/>
