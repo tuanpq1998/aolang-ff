@@ -32,7 +32,6 @@ export default class MainBoard extends Component {
     }
 
     componentDidMount() {
-        console.log("did mount");
         const data = JSON.parse(localStorage.getItem("data")) !== null ? 
             JSON.parse(localStorage.getItem("data")) : GET_TEMPLATE_BOARD(TYPE_8P_1V1);
         const setting = JSON.parse(localStorage.getItem("setting")) !== null ? 
@@ -168,7 +167,8 @@ export default class MainBoard extends Component {
     resetAllTeams = () => {
         this.setState({
             data : GET_TEMPLATE_BOARD(TYPE_8P_1V1)
-        })
+        }, () => this.saveTeamData())
+        
     }
 
     render() {
@@ -230,7 +230,7 @@ export default class MainBoard extends Component {
                     </>
                 ))}
             </div>
-            
+            <div className="footer">{new Date().toLocaleDateString()}</div>
         </div>)
     }
 }

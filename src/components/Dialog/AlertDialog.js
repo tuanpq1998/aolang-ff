@@ -59,7 +59,7 @@ export default class AlertDialog extends Component {
                         Error
                     </div>
                     <div className="box_body">
-                        <p>Không thể loại cả 2!</p>
+                        <p>Cannot disable two team in same branch!</p>
                     </div>
                     <div className="box_footer">
                         <div onClick={this.props.close} className="btn">OK</div>

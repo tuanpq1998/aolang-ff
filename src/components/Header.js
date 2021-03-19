@@ -10,13 +10,13 @@ export default class Header extends Component {
                     </div>
                     <div className="nav-choose" style={{display : this.props.hasFinalResult? null : "none"}} 
                         onClick={this.props.showFinalResult}>
-                        <span title="Result" className="material-icons-outlined md-36"> equalizer </span>
+                        <span title="Show result" className="material-icons-outlined md-36"> equalizer </span>
                     </div>
                     <div className="nav-choose" onClick={this.props.reset}>
                         <span title="Reset all team!" className="material-icons-outlined md-36"> restart_alt </span>
                     </div>
                     <div className="nav-choose" onClick={this.props.export}>
-                        <span title="Export" className="material-icons-outlined md-36"> download </span>
+                        <span title="Export to JPG" className="material-icons-outlined md-36"> download </span>
                     </div>
                 </nav>
                 {

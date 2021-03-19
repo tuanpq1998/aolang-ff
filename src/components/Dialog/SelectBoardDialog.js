@@ -66,6 +66,8 @@ export default class SelectBoardDialog extends Component {
         const result = this.props.model ? this.props.model.result : "";
         var {won} = this.state;
 
+        const boxHeaderText = teams ? "Select" : "Error";
+
         const boxBody = teams ? (<>
             <div className="flex-container">
                 <div className="left-select">
@@ -115,7 +117,7 @@ export default class SelectBoardDialog extends Component {
                     overlayClassName="overlay">
                     <form onSubmit={(event) => this.handleSubmit(event)}>
                         <div className="box_header">
-                            Select Winner
+                            {boxHeaderText}
                         </div>
                         <div className="box_body" style={{padding: "20px 30px"}}>
                             {boxBody}

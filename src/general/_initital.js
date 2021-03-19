@@ -45,7 +45,7 @@ export const GET_TEMPLATE_BOARD = (type) => {
 
                     data[`w${i-1}${i}`] = {
                         child, 
-                        result : "0-0",
+                        result : "",
                         pen : "",
                         won : "",
                         color : "",
