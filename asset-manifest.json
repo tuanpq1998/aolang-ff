@@ -1,8 +1,8 @@
 {
   "files": {
-    "main.css": "/aolang-ff/static/css/main.227b92e5.chunk.css",
-    "main.js": "/aolang-ff/static/js/main.b9016b2e.chunk.js",
-    "main.js.map": "/aolang-ff/static/js/main.b9016b2e.chunk.js.map",
+    "main.css": "/aolang-ff/static/css/main.169f6d1f.chunk.css",
+    "main.js": "/aolang-ff/static/js/main.40fd44d2.chunk.js",
+    "main.js.map": "/aolang-ff/static/js/main.40fd44d2.chunk.js.map",
     "runtime-main.js": "/aolang-ff/static/js/runtime-main.21d84a3d.js",
     "runtime-main.js.map": "/aolang-ff/static/js/runtime-main.21d84a3d.js.map",
     "static/js/2.7c1f7e4c.chunk.js": "/aolang-ff/static/js/2.7c1f7e4c.chunk.js",
@@ -10,13 +10,13 @@
     "static/js/3.eb902d61.chunk.js": "/aolang-ff/static/js/3.eb902d61.chunk.js",
     "static/js/3.eb902d61.chunk.js.map": "/aolang-ff/static/js/3.eb902d61.chunk.js.map",
     "index.html": "/aolang-ff/index.html",
-    "static/css/main.227b92e5.chunk.css.map": "/aolang-ff/static/css/main.227b92e5.chunk.css.map",
+    "static/css/main.169f6d1f.chunk.css.map": "/aolang-ff/static/css/main.169f6d1f.chunk.css.map",
     "static/js/2.7c1f7e4c.chunk.js.LICENSE.txt": "/aolang-ff/static/js/2.7c1f7e4c.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.21d84a3d.js",
     "static/js/2.7c1f7e4c.chunk.js",
-    "static/css/main.227b92e5.chunk.css",
-    "static/js/main.b9016b2e.chunk.js"
+    "static/css/main.169f6d1f.chunk.css",
+    "static/js/main.40fd44d2.chunk.js"
   ]
 }
