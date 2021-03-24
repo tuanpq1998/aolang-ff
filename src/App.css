@@ -198,8 +198,8 @@ form {
   transition: background-color 200ms ease-in-out;
 }
 
-.left-select .team:hover, .right-select .team:hover {
-  background-color: rgba(43, 48, 57, 0.8);
+.left-select input[type="radio"]:not(:checked)+.team:hover, .right-select input[type="radio"]:not(:checked)+.team:hover {
+  background-color: rgba(0, 0, 0, 0.8);
 }
 
 .right {
@@ -279,8 +279,7 @@ input[type="color"] {
 }
 
 input[type="radio"]:not(:checked)+label {
-  border-color: #4062F6;
-  background-color: rgba(97, 154, 234, 0.4);
+  background-color: rgba(0, 0, 0, 0.6);
 }
 
 .flex-container input[type="number"] {
